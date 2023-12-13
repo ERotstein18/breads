@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 //Bakers
 const bakersController = require('./controllers/bakers_controller.js')
-app.use('/breads', bakersController)
+app.use('/bakers', bakersController)
 
 
 // 404 Page
