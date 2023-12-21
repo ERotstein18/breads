@@ -15,11 +15,7 @@ const bakerSchema = new Schema({
         required: true
     },
     bio: String
-},
-    { toJSON: { virtuals: true } })
-
-                   
-
+}, { toJSON: { virtuals: true } })
 
 // Virtuals:
 bakerSchema.virtual('breads', {
@@ -28,6 +24,12 @@ bakerSchema.virtual('breads', {
     foreignField: 'baker'
 })
 
+bakerSchema.post('findOneAndDelete', function () {
+    Bread.deleteMany({ baker: this._conditions._id })
+        .then(deleteStatus => {
+            console.log(deleteStatus)
+        })
+})
 
 // model and export
 const Baker = mongoose.model('Baker', bakerSchema)
